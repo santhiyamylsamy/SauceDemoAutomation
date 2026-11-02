@@ -1,17 +1,17 @@
 import {expect, test} from '@playwright/test';
-const {LoginPage} = require('../pages/loginPage');
-const {checkoutPage} = require('../pages/checkout');
-const users = require('../data/users');
-const constants = require('../data/constants');
-const {inventoryPage} = require('../pages/inventory');
-const {cartPage} = require('../pages/cart');
+import { LoginPage } from '../pages/LoginPage';
+import {checkoutPage} from '../pages/checkout';
+import * as users from '../data/users';
+import *as constants from '../data/constants';
+import {inventoryPage} from '../pages/inventory';
+import {cartPage} from '../pages/cart';
 
-let loginpage;
-let checkoutpage;
-let inventorypage;
-let cartpage;
-let context;
-let page;
+let loginpage:any;
+let checkoutpage:any;
+let inventorypage:any;
+let cartpage:any;
+let context:any;
+let page:any;
 
 test.describe.configure({ mode: 'serial' });
 

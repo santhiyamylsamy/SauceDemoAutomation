@@ -1,13 +1,13 @@
 import {expect, test} from '@playwright/test';
-const {LoginPage} = require('../pages/loginPage');
-const users = require('../data/users');
-const {inventoryPage} = require('../pages/inventory');
-const constants = require('../data/constants');
-const {cartPage}=require('../pages/cart');
+import {LoginPage} from '../pages/LoginPage';
+import * as users from '../data/users';
+import {inventoryPage} from '../pages/inventory';
+import * as constants from '../data/constants';
+import {cartPage} from '../pages/cart';
 
-let loginpage;
-let inventorypage;
-let cartpage;
+let loginpage:any;
+let inventorypage:any;
+let cartpage:any;
 
 test.beforeEach(async ({ page }) => {
     loginpage =new LoginPage(page);

@@ -1,8 +1,13 @@
-const { expect } = require('@playwright/test');
+import { Locator, Page}  from '@playwright/test';
 
-class sortingPage
+export class sortingPage
 {
-    constructor(page)
+    readonly page:Page;
+    readonly sortDropDown:Locator;
+    readonly itemPrice:Locator;
+    readonly itemNames:Locator;
+
+    constructor(page: Page)
     {
         this.page = page;
         this.sortDropDown=page.locator('[data-test="product-sort-container"]');
@@ -10,19 +15,18 @@ class sortingPage
         this.itemNames = page.locator('[data-test="inventory-item-name"]');
     }
 
-    async sortby(optionvalue)
+    async sortby(optionvalue:string):Promise<void>
     {
         await this.sortDropDown.selectOption(optionvalue);
     }
-    async getAllProductPrices(){
+    async getAllProductPrices():Promise<number[]>{
         const priceTexts=await this.itemPrice.allTextContents();
         return priceTexts.map(priceText => parseFloat(priceText.replace('$', '')));
     }
-    async getAllProductNAmes()
+    async getAllProductNAmes():Promise<string[]>
     {
         const itemNames= await this.itemNames.allTextContents();
         return itemNames;
     }
 }
 
-module.exports = {sortingPage:sortingPage};

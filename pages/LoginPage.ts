@@ -1,9 +1,15 @@
-const { expect } = require('@playwright/test');
-const constants = require('../data/constants');
+import { expect, Locator, Page }  from '@playwright/test';
+import constants from '../data/constants';
 
-class LoginPage
+export class LoginPage
 {
-    constructor(page)
+    readonly page:Page;
+    readonly Username:Locator;
+    readonly Password:Locator;
+    readonly LoginButton:Locator;
+    readonly baseurl:string;
+
+    constructor(page: Page)
     {
         this.page = page;
         this.Username=page.getByPlaceholder('Username');
@@ -19,19 +25,16 @@ class LoginPage
         console.log('Baseurl opened successfully');
     }
 
-    async Login(username,password)
+    async Login(username:string,password:string):Promise<void>
     {
         await this.Username.fill(username);
         await this.Password.fill(password);
         await this.LoginButton.click();
     }
 
-    async assertLoginSuccess()
+    async assertLoginSuccess():Promise<void>
     {
         await expect(this.page).toHaveURL(constants.url.inventoryPage);
         await expect(this.page.locator('.title')).toHaveText(constants.texts.productTitle);
     }
 }
-
-
-module.exports = {LoginPage:LoginPage};
